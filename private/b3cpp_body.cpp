@@ -27,8 +27,15 @@ namespace b3cpp
 		def.isEnabled.applyIfNotNull(groundBodyDef.isEnabled);
 		def.allowFastRotation.applyIfNotNull(groundBodyDef.allowFastRotation);
 		def.enableContactRecycling.applyIfNotNull(groundBodyDef.enableContactRecycling);
-		b3BodyId groundId = b3CreateBody(util::getId(&world), &groundBodyDef);
-	};
+		b3BodyId id = b3CreateBody(util::getId(&world), &groundBodyDef);
+		util::setId(this, id);
+	}
+
+	Shape Body::createBoxShape(ShapeDef def)
+	{
+		
+		
+	}
 
 	bool Body::isIdValid()
 	{

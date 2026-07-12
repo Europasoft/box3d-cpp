@@ -5,6 +5,7 @@
 #include "include/b3cpp_base.h"
 #include "include/b3cpp_types.h"
 #include "include/b3cpp_world.h"
+#include "include/b3cpp_shape.h"
 #include <cstdint>
 
 namespace b3cpp
@@ -13,6 +14,8 @@ namespace b3cpp
 	{
 	public:
 		Body(World& world, BodyDef def = BodyDef());
+
+		Shape createBoxShape(ShapeDef def);
 
 	protected:
 		bool isIdValid() override;

@@ -158,4 +158,7 @@ namespace b3cpp
 		NullableValue<bool> enableContactRecycling;
 	};
 
+	struct ShapeDef // TODO
+	{};
+
 }

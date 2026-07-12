@@ -50,6 +50,22 @@ namespace b3cpp
 			b3StoreContactId(id, w->getIdBuffer());
 		}
 
+		// shape id
+		b3ShapeId getId(const b3cpp::Shape* w)
+		{
+			uint64_t packed64 = 0;
+			std::memcpy(&packed64, w->getIdBuffer(), sizeof(uint64_t));
+			return b3LoadShapeId(packed64);
+		}
+
+		void setId(b3cpp::Shape* w, b3ShapeId id)
+		{
+			uint64_t packed64 = b3StoreShapeId(id);
+			std::memcpy(w->getIdBuffer(), &packed64, sizeof(uint64_t));
+		}
+
+
+
 		// vector conversions
 		b3Vec3 vectorToB3(const Vector& v)
 		{

@@ -7,4 +7,5 @@
 #include "include/b3cpp_world.h"
 #include "include/b3cpp_body.h"
 #include "include/b3cpp_contact.h"
+#include "include/b3cpp_shape.h"
 

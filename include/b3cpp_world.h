@@ -4,6 +4,7 @@
 #pragma once
 #include "include/b3cpp_base.h"
 #include "include/b3cpp_types.h"
+#include "include/b3cpp_body.h"
 #include <cstdint>
 
 namespace b3cpp
@@ -12,6 +13,8 @@ namespace b3cpp
 	{
 	public:
 		World(WorldDef def = WorldDef());
+
+		Body createBody(BodyDef def = BodyDef());
 
 	protected:
 		bool isIdValid() override;

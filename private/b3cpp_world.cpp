@@ -22,8 +22,12 @@ namespace b3cpp
 		def.enableContinuous.applyIfNotNull(worldDef.enableContinuous);
 		b3WorldId id = b3CreateWorld(&worldDef);
 		util::setId(this, id);
-	};
+	}
 
+	Body World::createBody(BodyDef def)
+	{
+		return Body(*this, def);
+	}
 
 	bool World::isIdValid()
 	{
