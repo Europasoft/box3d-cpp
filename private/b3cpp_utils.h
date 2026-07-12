@@ -15,50 +15,50 @@ namespace b3cpp
 	namespace util
 	{
 		// world id
-		b3WorldId getId(const b3cpp::World* w)
+		inline b3WorldId getId(const b3cpp::World* w)
 		{
 			return b3LoadWorldId(w->getIdBuffer()[0]);
 		}
 
-		void setId(b3cpp::World* w, b3WorldId id)
+		inline void setId(b3cpp::World* w, b3WorldId id)
 		{
 			w->getIdBuffer()[0] = b3StoreWorldId(id);
 		}
 
 		// body id
-		b3BodyId getId(const b3cpp::Body* w)
+		inline b3BodyId getId(const b3cpp::Body* w)
 		{
 			uint64_t packed64 = 0;
 			std::memcpy(&packed64, w->getIdBuffer(), sizeof(uint64_t));
 			return b3LoadBodyId(packed64);
 		}
 
-		void setId(b3cpp::Body* w, b3BodyId id)
+		inline void setId(b3cpp::Body* w, b3BodyId id)
 		{
 			uint64_t packed64 = b3StoreBodyId(id);
 			std::memcpy(w->getIdBuffer(), &packed64, sizeof(uint64_t));
 		}
 
 		// contact id
-		b3ContactId getId(const b3cpp::Contact* w)
+		inline b3ContactId getId(const b3cpp::Contact* w)
 		{
 			return b3LoadContactId(const_cast<uint32_t*>(w->getIdBuffer()));
 		}
 
-		void setId(b3cpp::Contact* w, b3ContactId id)
+		inline void setId(b3cpp::Contact* w, b3ContactId id)
 		{
 			b3StoreContactId(id, w->getIdBuffer());
 		}
 
 		// shape id
-		b3ShapeId getId(const b3cpp::Shape* w)
+		inline b3ShapeId getId(const b3cpp::Shape* w)
 		{
 			uint64_t packed64 = 0;
 			std::memcpy(&packed64, w->getIdBuffer(), sizeof(uint64_t));
 			return b3LoadShapeId(packed64);
 		}
 
-		void setId(b3cpp::Shape* w, b3ShapeId id)
+		inline void setId(b3cpp::Shape* w, b3ShapeId id)
 		{
 			uint64_t packed64 = b3StoreShapeId(id);
 			std::memcpy(w->getIdBuffer(), &packed64, sizeof(uint64_t));
@@ -67,7 +67,7 @@ namespace b3cpp
 
 
 		// vector conversions
-		b3Vec3 vectorToB3(const Vector& v)
+		inline b3Vec3 vectorToB3(const Vector& v)
 		{
 			return b3Vec3
 			{
@@ -77,7 +77,7 @@ namespace b3cpp
 			};
 		}
 
-		b3Pos vectorToB3Pos(const Vector& v)
+		inline b3Pos vectorToB3Pos(const Vector& v)
 		{
 			return b3Pos
 			{
@@ -87,7 +87,7 @@ namespace b3cpp
 			};
 		}
 
-		b3Quat vectorToB3Quat(const Vector& v)
+		inline b3Quat vectorToB3Quat(const Vector& v)
 		{
 			return b3Quat
 			{

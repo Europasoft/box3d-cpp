@@ -18,8 +18,8 @@ namespace b3cpp
 			nullFlag = false;
 			return *this;
 		}
-		const T& val() const { return val; }
-		bool isNull() const { return isNull; }
+		const T& val() const { return value; }
+		bool isNull() const { return nullFlag; }
 		void applyIfNotNull(T& target) const { if (!isNull()) target = value; }
 		template<typename X>
 		void applyIfNotNull(X& target, const X& v) const { if (!isNull()) target = v; }

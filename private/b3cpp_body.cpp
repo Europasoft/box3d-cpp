@@ -1,5 +1,7 @@
 #include "include/b3cpp_body.h"
 #include "include/b3cpp_types.h"
+#include "include/b3cpp_world.h"
+#include "include/b3cpp_shape.h"
 
 #include "private/b3cpp_utils.h"
 #include "box3d/include/box3d/box3d.h" // Box3D types used internally
@@ -10,6 +12,7 @@
 namespace b3cpp
 {
 	Body::Body(World& world, BodyDef def)
+		: world(world)
 	{
 		b3BodyDef groundBodyDef = b3DefaultBodyDef();
 		def.type.applyIfNotNull(groundBodyDef.type, static_cast<b3BodyType>(def.type.val()));
@@ -31,10 +34,12 @@ namespace b3cpp
 		util::setId(this, id);
 	}
 
-	Shape Body::createBoxShape(ShapeDef def)
+	void Body::addShape(const Shape& shape)
 	{
-		
-		
+		// TODO: this probably causes object slicing! fix asap
+		std::unique_ptr<Shape> s = std::make_unique<Shape>(shape); // copy and keep hold of the object
+		s->addToBody(*this);
+		shapes.push_back(std::move(s));
 	}
 
 	bool Body::isIdValid()

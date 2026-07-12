@@ -4,20 +4,26 @@
 #pragma once
 #include "include/b3cpp_base.h"
 #include "include/b3cpp_types.h"
-#include "include/b3cpp_world.h"
-#include "include/b3cpp_shape.h"
 #include <cstdint>
+#include <memory>
+#include <vector>
 
 namespace b3cpp
 {
+	class World;
+	class Shape;
+
 	class Body : public Wrapper
 	{
 	public:
 		Body(World& world, BodyDef def = BodyDef());
 
-		Shape createBoxShape(ShapeDef def);
+		void addShape(const Shape& shape);
 
 	protected:
 		bool isIdValid() override;
+
+		World& world;
+		std::vector<std::unique_ptr<Shape>> shapes;
 	};
 }

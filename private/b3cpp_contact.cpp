@@ -6,19 +6,6 @@
 
 #include <cstdint>
 
-namespace
-{
-	b3ContactId getId(const b3cpp::Wrapper* w)
-	{
-		return b3LoadContactId(const_cast<uint32_t*>(w->getIdBuffer()));
-	}
-
-	void setId(b3cpp::Wrapper* w, b3ContactId id)
-	{
-		b3StoreContactId(id, w->getIdBuffer());
-	}
-}
-
 namespace b3cpp
 {
 	Contact::Contact()
@@ -28,6 +15,6 @@ namespace b3cpp
 
 	bool Contact::isIdValid()
 	{
-		return b3Contact_IsValid(getId(this));
+		return b3Contact_IsValid(util::getId(this));
 	}
 }
