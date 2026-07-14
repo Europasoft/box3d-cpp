@@ -7,7 +7,6 @@
 #include "box3d/include/box3d/box3d.h" // Box3D types used internally
 
 #include <cstdint>
-#include <math_functions.h>
 #include <cstring> // for std::memcpy
 
 namespace b3cpp
