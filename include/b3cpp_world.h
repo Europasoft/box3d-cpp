@@ -13,6 +13,7 @@ namespace b3cpp
 	{
 	public:
 		World(WorldDef def = WorldDef());
+		~World();
 
 		Body createBody(BodyDef def = BodyDef());
 

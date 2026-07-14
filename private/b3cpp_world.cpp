@@ -24,6 +24,11 @@ namespace b3cpp
 		util::setId(this, id);
 	}
 
+	World::~World()
+	{
+		b3DestroyWorld(util::getId(this));
+	}
+
 	Body World::createBody(BodyDef def)
 	{
 		return Body(*this, def);

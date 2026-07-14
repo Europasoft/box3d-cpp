@@ -34,12 +34,10 @@ namespace b3cpp
 		util::setId(this, id);
 	}
 
-	void Body::addShape(const Shape& shape)
-	{
-		// TODO: this probably causes object slicing! fix asap
-		std::unique_ptr<Shape> s = std::make_unique<Shape>(shape); // copy and keep hold of the object
-		s->addToBody(*this);
-		shapes.push_back(std::move(s));
+    Body::~Body()
+    {
+		// no need to manually destroy shapes here
+		if (isIdValid()) b3DestroyBody(util::getId(this));
 	}
 
 	bool Body::isIdValid()

@@ -26,28 +26,28 @@ namespace b3cpp
 		if (isIdValid()) b3DestroyShape(util::getId(this), true);
 	}
 
-	void BoxHullShape::addToBody(Body& body)
+	void BoxHullShape::activate(ShapeDef def)
 	{
 		b3BoxHull hull = b3MakeBoxHull(halfWidthX, halfWidthY, halfWidthZ);
 		b3ShapeDef d = getShapeDef(def);
 		util::setId(this, b3CreateHullShape(b3cpp::util::getId(&body), &d, &hull.base));
 	}
 
-	void SphereShape::addToBody(Body& body)
+	void SphereShape::activate(ShapeDef def)
 	{
 		b3Sphere sphere = { .center = util::vectorToB3(localCenter), .radius = radius };
 		b3ShapeDef d = getShapeDef(def);
 		util::setId(this, b3CreateSphereShape(b3cpp::util::getId(&body), &d, &sphere));
 	}
 
-	void CapsuleShape::addToBody(Body& body)
+	void CapsuleShape::activate(ShapeDef def)
 	{
 		b3Capsule capsule = { .center1 = util::vectorToB3(center1), .center2 = util::vectorToB3(center2), .radius = radius };
 		b3ShapeDef d = getShapeDef(def);
 		util::setId(this, b3CreateCapsuleShape(b3cpp::util::getId(&body), &d, &capsule));
 	}
 
-	void HullShape::addToBody(Body& body)
+	void HullShape::activate(ShapeDef def)
 	{
 		std::vector<b3Vec3> points;
 		for (const auto& v : vertices) { points.push_back(util::vectorToB3(v)); }
@@ -57,30 +57,30 @@ namespace b3cpp
 		util::setId(this, b3CreateHullShape(b3cpp::util::getId(&body), &d, hullData));
 	}
 
-	void HullShape::destroy()
+	HullShape::~HullShape()
 	{
+		// this presumably only happens when the owning Body is removed, so no need to call destroy()
 		if (data) b3DestroyHull(reinterpret_cast<b3HullData*>(data));
-		if (isIdValid()) b3DestroyShape(util::getId(this), true);
 	}
 
-	void HeightfieldShape::addToBody(Body& body)
+	void HeightfieldShape::activate(ShapeDef def)
 	{
 		assert(0 && "TODO: shape not implemented");
 	}
 
-	void HeightfieldShape::destroy()
+	HeightfieldShape::~HeightfieldShape()
+	{
+		// TODO
+	}
+
+	void MeshShape::activate(ShapeDef def)
 	{
 		assert(0 && "TODO: shape not implemented");
 	}
 
-	void MeshShape::addToBody(Body& body)
+	MeshShape::~MeshShape()
 	{
-		assert(0 && "TODO: shape not implemented");
-	}
-
-	void MeshShape::destroy()
-	{
-		assert(0 && "TODO: shape not implemented");
+		// TODO
 	}
 
 	bool Shape::isIdValid()
