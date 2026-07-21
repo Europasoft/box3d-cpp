@@ -15,11 +15,20 @@ namespace b3cpp
 	public:
 		World(WorldDef def = WorldDef());
 		~World();
+		bool isIdValid() override;
 
 		std::unique_ptr<Body> createBody(BodyDef def = BodyDef());
 		void step(float timeStep, int subStepCount);
 		void step();
-
-		bool isIdValid() override;
+		void setGravity(Vector g);
+		void explode(ExplosionDef def);
+		void setContactRecycleDistance(float distance);
+		void setContactTuning(float hertz, float dampingRatio, float contactSpeed);
+		void setHitEventThreshold(float value);
+		void setMaximumLinearSpeed(float maximumLinearSpeed);
+		void setRestitutionThreshold(float value);
+		void enableContinuous(bool flag);
+		void enableSleeping(bool flag);
+		void enableSpeculative(bool flag);
 	};
 }

@@ -23,6 +23,8 @@ namespace b3cpp
 		Body& operator=(const Body&) = delete;
 		Body(Body&&) noexcept = default;
 		Body& operator=(Body&&) noexcept = default;
+		
+		bool isIdValid() override;
 
 		/*
 		* Example:
@@ -45,8 +47,9 @@ namespace b3cpp
 		void setTransform(b3cpp::Vector position, b3cpp::Vector rotationQuat);
 		void setPosition(b3cpp::Vector position);
 		void setRotationQuat(b3cpp::Vector rotationQuat);
-
-		bool isIdValid() override;
+		void applyAngularImpulse(b3cpp::Vector impulse);
+		void applyTorque(b3cpp::Vector torque);
+		
 
 	protected:
 		World& world;

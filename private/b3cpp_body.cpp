@@ -83,4 +83,14 @@ namespace b3cpp
 		b3Body_SetTransform(util::getId(this), p, util::vectorToB3Quat(rotationQuat));
 	}
 
+	void Body::applyAngularImpulse(b3cpp::Vector impulse)
+	{
+		b3Body_ApplyAngularImpulse(util::getId(this), util::vectorToB3(impulse), true);
+	}
+
+	void Body::applyTorque(b3cpp::Vector torque)
+	{
+		b3Body_ApplyTorque(util::getId(this), util::vectorToB3(torque), true);
+	}
+
 }

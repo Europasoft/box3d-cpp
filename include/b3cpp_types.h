@@ -163,4 +163,24 @@ namespace b3cpp
 	struct ShapeDef // TODO
 	{};
 
+	struct ExplosionDef
+	{
+		/// Mask bits to filter shapes
+		NullableValue<uint64_t> maskBits;
+
+		/// The center of the explosion in world space
+		NullableValue<Vector> position;
+
+		/// The radius of the explosion
+		NullableValue<float> radius;
+
+		/// The falloff distance beyond the radius. Impulse is reduced to zero at this distance.
+		NullableValue<float> falloff;
+
+		/// Impulse per unit area. This applies an impulse according to the shape area that
+		/// is facing the explosion. Explosions only apply to spheres, capsules, and hulls. This
+		/// may be negative for implosions.
+		NullableValue<float> impulsePerArea;
+	};
+
 }

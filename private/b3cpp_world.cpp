@@ -49,4 +49,61 @@ namespace b3cpp
 	{
 		b3World_Step(util::getId(this), 0.01666f, 4);
 	}
+
+	void World::setGravity(Vector g)
+	{
+		b3World_SetGravity(util::getId(this), util::vectorToB3(g));
+	}
+
+    void World::explode(ExplosionDef def)
+    {
+		b3ExplosionDef explDef = b3DefaultExplosionDef();
+		def.falloff.applyIfNotNull(explDef.falloff);
+		def.position.applyIfNotNull(explDef.position, util::vectorToB3(def.position.val()));
+		def.radius.applyIfNotNull(explDef.radius);
+		def.maskBits.applyIfNotNull(explDef.maskBits);
+		def.impulsePerArea.applyIfNotNull(explDef.impulsePerArea);
+		b3World_Explode(util::getId(this), &explDef);
+	}
+
+	void World::setContactRecycleDistance(float distance)
+	{
+		b3World_SetContactRecycleDistance(util::getId(this), distance);
+	}
+
+	void World::setContactTuning(float hertz, float dampingRatio, float contactSpeed)
+	{
+		b3World_SetContactTuning(util::getId(this), hertz, dampingRatio, contactSpeed);
+	}
+
+	void World::setHitEventThreshold(float value)
+	{
+		b3World_SetHitEventThreshold(util::getId(this), value);
+	}
+
+	void World::setMaximumLinearSpeed(float maximumLinearSpeed)
+	{
+		b3World_SetMaximumLinearSpeed(util::getId(this), maximumLinearSpeed);
+	}
+
+	void World::setRestitutionThreshold(float value)
+	{
+		b3World_SetRestitutionThreshold(util::getId(this), value);
+	}
+
+	void World::enableContinuous(bool flag)
+	{
+		b3World_EnableContinuous(util::getId(this), flag);
+	}
+
+	void World::enableSleeping(bool flag)
+	{
+		b3World_EnableSleeping(util::getId(this), flag);
+	}
+
+	void World::enableSpeculative(bool flag)
+	{
+		b3World_EnableSpeculative(util::getId(this), flag);
+	}
+
 }
