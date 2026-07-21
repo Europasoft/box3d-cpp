@@ -3,21 +3,23 @@
 
 #pragma once
 #include "include/b3cpp_base.h"
-#include "include/b3cpp_types.h"
-#include "include/b3cpp_body.h"
 #include <cstdint>
+#include <memory>
 
 namespace b3cpp
 {
+	class Body;
+
 	class World : public Wrapper
 	{
 	public:
 		World(WorldDef def = WorldDef());
 		~World();
 
-		Body createBody(BodyDef def = BodyDef());
+		std::unique_ptr<Body> createBody(BodyDef def = BodyDef());
+		void step(float timeStep, int subStepCount);
+		void step();
 
-	protected:
 		bool isIdValid() override;
 	};
 }

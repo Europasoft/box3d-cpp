@@ -2,6 +2,7 @@
 // do not include Box3D headers here, to avoid leaking C types into the global scope where this file is included
 
 #pragma once
+#include "include/b3cpp_types.h"
 #include <cstdint>
 
 namespace b3cpp

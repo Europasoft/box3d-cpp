@@ -34,6 +34,8 @@ namespace b3cpp
 	public:
 		double x, y, z, w;
 		Vector() : x(0), y(0), z(0), w(0) {};
+		Vector(double x, double y, double z, double w = 0.0) : x(x), y(y), z(z), w(w)
+		{};
 	};
 
 	struct WorldDef

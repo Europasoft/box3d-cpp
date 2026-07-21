@@ -8,6 +8,7 @@
 
 #include <cstdint>
 #include <cstring> // for std::memcpy
+#include <cassert>
 
 namespace b3cpp
 {
@@ -44,4 +45,42 @@ namespace b3cpp
 	{
 		return b3Body_IsValid(util::getId(this));
 	}
+
+	b3cpp::Vector Body::getPosition() const
+	{
+		const b3Vec3 p = b3Body_GetPosition(util::getId(this));
+		return b3cpp::Vector(p.x, p.y, p.z);
+	}
+
+	b3cpp::Vector Body::getRotationQuat() const
+	{
+		const b3Quat q = b3Body_GetRotation(util::getId(this));
+		return b3cpp::Vector(q.v.x, q.v.y, q.v.z, q.s);
+	}
+
+	b3cpp::Vector Body::getRotationAxisAngle() const
+	{
+		const b3Quat q = b3Body_GetRotation(util::getId(this));
+		float rad = 0;
+		const b3Vec3 a = b3GetAxisAngle(&rad, q);
+		return b3cpp::Vector(a.x * rad, a.y * rad, a.z * rad, 0);
+	}
+
+	void Body::setTransform(b3cpp::Vector position, b3cpp::Vector rotationQuat)
+	{
+		b3Body_SetTransform(util::getId(this), util::vectorToB3Pos(position), util::vectorToB3Quat(rotationQuat));
+	}
+
+	void Body::setPosition(b3cpp::Vector position)
+	{
+		const b3Quat q = b3Body_GetRotation(util::getId(this));
+		b3Body_SetTransform(util::getId(this), util::vectorToB3Pos(position), q);
+	}
+
+	void Body::setRotationQuat(b3cpp::Vector rotationQuat)
+	{
+		const b3Pos p = b3Body_GetPosition(util::getId(this));
+		b3Body_SetTransform(util::getId(this), p, util::vectorToB3Quat(rotationQuat));
+	}
+
 }

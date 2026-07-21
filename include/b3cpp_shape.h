@@ -3,7 +3,6 @@
 
 #pragma once
 #include "include/b3cpp_base.h"
-#include "include/b3cpp_types.h"
 #include <cstdint>
 #include <vector>
 

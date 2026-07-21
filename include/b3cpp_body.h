@@ -3,7 +3,6 @@
 
 #pragma once
 #include "include/b3cpp_base.h"
-#include "include/b3cpp_types.h"
 #include "include/b3cpp_shape.h"
 #include <cstdint>
 #include <memory>
@@ -19,6 +18,11 @@ namespace b3cpp
 	public:
 		Body(World& world, BodyDef def = BodyDef());
 		~Body();
+		// movable, not copyable
+		Body(const Body&) = delete;
+		Body& operator=(const Body&) = delete;
+		Body(Body&&) noexcept = default;
+		Body& operator=(Body&&) noexcept = default;
 
 		/*
 		* Example:
@@ -35,9 +39,16 @@ namespace b3cpp
 			return *static_cast<T*>(shapes.back().get());
 		}
 
-	protected:
+		b3cpp::Vector getPosition() const;
+		b3cpp::Vector getRotationQuat() const;
+		b3cpp::Vector getRotationAxisAngle() const;
+		void setTransform(b3cpp::Vector position, b3cpp::Vector rotationQuat);
+		void setPosition(b3cpp::Vector position);
+		void setRotationQuat(b3cpp::Vector rotationQuat);
+
 		bool isIdValid() override;
 
+	protected:
 		World& world;
 		std::vector<std::unique_ptr<Shape>> shapes;
 	};

@@ -1,5 +1,6 @@
 #include "include/b3cpp_world.h"
 #include "include/b3cpp_types.h"
+#include "include/b3cpp_body.h"
 
 #include "private/b3cpp_utils.h"
 #include "box3d/include/box3d/box3d.h" // Box3D types used internally
@@ -29,13 +30,23 @@ namespace b3cpp
 		b3DestroyWorld(util::getId(this));
 	}
 
-	Body World::createBody(BodyDef def)
-	{
-		return Body(*this, def);
-	}
-
 	bool World::isIdValid()
 	{
 		return b3World_IsValid(util::getId(this));
+	}
+
+	std::unique_ptr<Body> World::createBody(BodyDef def)
+	{
+		return std::make_unique<Body>(*this, def);
+	}
+
+	void World::step(float timeStep, int subStepCount)
+	{
+		b3World_Step(util::getId(this), timeStep, subStepCount);
+	}
+
+	void World::step()
+	{
+		b3World_Step(util::getId(this), 0.01666f, 4);
 	}
 }
