@@ -93,4 +93,15 @@ namespace b3cpp
 		b3Body_ApplyTorque(util::getId(this), util::vectorToB3(torque), true);
 	}
 
+	void Body::setLinearVelocity(b3cpp::Vector velocity)
+	{
+		
+		b3Body_SetLinearVelocity(util::getId(this), util::vectorToB3(velocity));
+	}
+
+	void Body::setAngularVelocity(b3cpp::Vector velocity)
+	{
+		b3Body_SetAngularVelocity(util::getId(this), util::vectorToB3(velocity));
+	}
+
 }

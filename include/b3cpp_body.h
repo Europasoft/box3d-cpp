@@ -49,8 +49,9 @@ namespace b3cpp
 		void setRotationQuat(b3cpp::Vector rotationQuat);
 		void applyAngularImpulse(b3cpp::Vector impulse);
 		void applyTorque(b3cpp::Vector torque);
+        void setLinearVelocity(b3cpp::Vector velocity);
+		void setAngularVelocity(b3cpp::Vector velocity);
 		
-
 	protected:
 		World& world;
 		std::vector<std::unique_ptr<Shape>> shapes;
