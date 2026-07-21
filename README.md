@@ -15,6 +15,7 @@ sphereShape.radius = 1.f;
 ShapeDef shapeDef;
 sphereShape.activate(shapeDef);
 
+world->step();
 const b3cpp::Vector position = physicsBody->getPosition();
 ```
 
