@@ -160,8 +160,46 @@ namespace b3cpp
 		NullableValue<bool> enableContactRecycling;
 	};
 
-	struct ShapeDef // TODO
-	{};
+	struct ShapeDef
+	{
+		/// The density
+		NullableValue<float> density;
+
+		/// A sensor shape generates overlap events but never generates a collision response.
+		/// Sensors do not have continuous collision. Instead, use a ray or shape cast for those scenarios.
+		/// Sensors still contribute to the body mass if they have non-zero density.
+		/// @note Sensor events are disabled by default.
+		/// @see enableSensorEvents
+		NullableValue<bool> isSensor;
+
+		/// Enable sensor events for this shape. This applies to sensors and non-sensors. False by default, even for sensors.
+		NullableValue<bool> enableSensorEvents;
+
+		/// Enable contact events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors. False by default.
+		NullableValue<bool> enableContactEvents;
+
+		/// Enable hit events for this shape. Only applies to kinematic and dynamic bodies. Ignored for sensors. False by default.
+		NullableValue<bool> enableHitEvents;
+
+		/// Enable pre-solve contact events for this shape. Only applies to dynamic bodies. These are expensive
+		///	and must be carefully handled due to multithreading. Ignored for sensors.
+		NullableValue<bool> enablePreSolveEvents;
+
+		/// When shapes are created they will scan the environment for collision the next time step. This can significantly slow down
+		/// static body creation when there are many static shapes.
+		/// This is flag is ignored for dynamic and kinematic shapes which always invoke contact creation.
+		NullableValue<bool> invokeContactCreation;
+
+		/// Should the body update the mass properties when this shape is created. Default is true.
+		/// Warning: if this is false, you MUST call b3Body_ApplyMassFromShapes or b3Body_SetMassData before simulating the world.
+		NullableValue<bool> updateBodyMass;
+
+		/// Enable speculative collision. Leave this true unless you care about reducing ghost collision
+		/// more than continuous collision under rotation.
+		/// Experimental: this can only disable speculative contact between hulls and triangles (meshes and height fields).
+		NullableValue<bool> enableSpeculativeContact;
+
+	};
 
 	struct ExplosionDef
 	{
